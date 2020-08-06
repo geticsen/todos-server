@@ -2,6 +2,7 @@ package com.oocl.todos.service;
 
 import com.oocl.todos.dto.ToDoRequest;
 import com.oocl.todos.dto.ToDoResponse;
+import com.oocl.todos.exception.IllegalOperationException;
 import com.oocl.todos.exception.NoSuchDataException;
 import com.oocl.todos.mapper.ToDoMapper;
 import com.oocl.todos.model.ToDo;
@@ -82,7 +83,7 @@ public class ToDoServiceTest {
         assertEquals(message, getmessage);
     }
     @Test
-    void should_throw_no_such_data_exception_when_update_employee_given_wrong_id() {
+    void should_throw_no_such_data_exception_when_update_todos_given_wrong_id() {
 //        given
         int toDoId = -1;
         ToDoRepository toDoRepository = mock(ToDoRepository.class);
@@ -90,6 +91,19 @@ public class ToDoServiceTest {
         ToDoService toDoService = new ToDoService(toDoRepository);
 //        when
         Exception exception = assertThrows(NoSuchDataException.class, () -> toDoService.modifyToDo(toDoId, new ToDoRequest()));
+
+//        then
+        assertEquals(NoSuchDataException.class, exception.getClass());
+    }
+    @Test
+    void should_throw_illegal_operation_exception_when_add_todo_given_content_null() {
+//      given
+        int toDoId = -1;
+        ToDoRepository toDoRepository = mock(ToDoRepository.class);
+
+        ToDoService toDoService = new ToDoService(toDoRepository);
+//        when
+        Exception exception = assertThrows(IllegalOperationException.class, () -> toDoService.addToDo(new ToDoRequest()));
 
 //        then
         assertEquals(NoSuchDataException.class, exception.getClass());
