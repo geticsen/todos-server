@@ -34,6 +34,7 @@ public class ToDoService {
         return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
     public String deleteToDoById(Integer toDoId) {
-       return null;
+        toDoRepository.deleteById(toDoId);
+        return "success";
     }
 }
