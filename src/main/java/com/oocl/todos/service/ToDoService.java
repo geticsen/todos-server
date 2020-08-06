@@ -29,7 +29,8 @@ public class ToDoService {
         return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
 
-    public ToDoResponse modifyToDo(ToDo toDo) {
+    public ToDoResponse modifyToDo(Integer toDoId,ToDo toDo) {
+        toDo.setId(toDoId);
         return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
 }

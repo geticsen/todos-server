@@ -54,10 +54,11 @@ public class ToDoServiceTest {
         given(toDoRepository.save(toDo)).willReturn(toDo);
         ToDoService toDoService = new ToDoService(toDoRepository);
 //        when
-        ToDoResponse toDoResponse = toDoService.modifyToDo(toDo);
+        ToDoResponse toDoResponse = toDoService.modifyToDo(toDo.getId(),toDo);
 //        then
         assertEquals(toDo.getId(),toDoResponse.getId());
         assertEquals(toDo.getContent(),toDoResponse.getContent());
         assertEquals(toDo.getStatus(),toDoResponse.getStatus());
     }
+
 }
