@@ -1,5 +1,6 @@
 package com.oocl.todos.service;
 
+import com.oocl.todos.dto.ToDoResponse;
 import com.oocl.todos.model.ToDo;
 import com.oocl.todos.repository.ToDoRepository;
 
@@ -10,7 +11,7 @@ public class ToDoService {
 
     }
 
-    public List<ToDo> getAll() {
+    public List<ToDoResponse> getAll() {
         return null;
     }
 }
