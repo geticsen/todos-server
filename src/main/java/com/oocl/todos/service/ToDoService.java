@@ -26,6 +26,6 @@ public class ToDoService {
     }
 
     public ToDoResponse addToDo(ToDo toDo) {
-        return null;
+        return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
 }

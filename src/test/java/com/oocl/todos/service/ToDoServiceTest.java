@@ -36,7 +36,7 @@ public class ToDoServiceTest {
 //      given
         ToDo toDo = new ToDo(2,"go home",false);
         ToDoRepository toDoRepository = mock(ToDoRepository.class);
-
+        given(toDoRepository.save(toDo)).willReturn(toDo);
         ToDoService toDoService = new ToDoService(toDoRepository);
 //        when
         ToDoResponse toDoResponse = toDoService.addToDo(toDo);
