@@ -26,4 +26,9 @@ public class ToDosController {
     public ToDoResponse addToDo(@RequestBody ToDoRequest toDoRequest){
            return toDoService.addToDo(toDoRequest);
     }
+    @PutMapping("/{toDoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ToDoResponse modifyToDo(@PathVariable Integer toDoId,@RequestBody ToDoRequest toDoRequest){
+        return toDoService.modifyToDo(toDoId,toDoRequest);
+    }
 }

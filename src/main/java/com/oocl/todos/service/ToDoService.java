@@ -29,8 +29,9 @@ public class ToDoService {
         return ToDoMapper.convertToToDoResponse(toDo);
     }
 
-    public ToDoResponse modifyToDo(Integer toDoId,ToDo toDo) {
-        toDo.setId(toDoId);
+    public ToDoResponse modifyToDo(Integer toDoId,ToDoRequest toDoRequest) {
+        toDoRequest.setId(toDoId);
+        ToDo toDo = ToDoMapper.convertToToDo(toDoRequest);
         return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
     public String deleteToDoById(Integer toDoId) {
