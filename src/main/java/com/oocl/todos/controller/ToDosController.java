@@ -2,6 +2,7 @@ package com.oocl.todos.controller;
 
 import com.oocl.todos.dto.ToDoRequest;
 import com.oocl.todos.dto.ToDoResponse;
+import com.oocl.todos.exception.IllegalOperationException;
 import com.oocl.todos.exception.NoSuchDataException;
 import com.oocl.todos.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ToDosController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ToDoResponse addToDo(@RequestBody ToDoRequest toDoRequest){
+    public ToDoResponse addToDo(@RequestBody ToDoRequest toDoRequest) throws IllegalOperationException {
            return toDoService.addToDo(toDoRequest);
     }
     @PutMapping("/{toDoId}")

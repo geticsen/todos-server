@@ -38,7 +38,7 @@ public class ToDoServiceTest {
     }
 
     @Test
-    void should_return_todo_when_add_todo_given_todo() {
+    void should_return_todo_when_add_todo_given_todo() throws IllegalOperationException {
 //      given
         ToDoRequest toDoRequest = new ToDoRequest(2, "go home", false);
         ToDo toDo = ToDoMapper.convertToToDo(toDoRequest);
@@ -106,7 +106,7 @@ public class ToDoServiceTest {
         Exception exception = assertThrows(IllegalOperationException.class, () -> toDoService.addToDo(new ToDoRequest()));
 
 //        then
-        assertEquals(NoSuchDataException.class, exception.getClass());
+        assertEquals(IllegalOperationException.class, exception.getClass());
     }
 
 

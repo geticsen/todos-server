@@ -2,6 +2,7 @@ package com.oocl.todos.service;
 
 import com.oocl.todos.dto.ToDoRequest;
 import com.oocl.todos.dto.ToDoResponse;
+import com.oocl.todos.exception.IllegalOperationException;
 import com.oocl.todos.exception.NoSuchDataException;
 import com.oocl.todos.mapper.ToDoMapper;
 import com.oocl.todos.model.ToDo;
@@ -27,7 +28,10 @@ public class ToDoService {
 
     }
 
-    public ToDoResponse addToDo(ToDoRequest toDoRequest) {
+    public ToDoResponse addToDo(ToDoRequest toDoRequest) throws IllegalOperationException {
+        if (toDoRequest.getContent() == null){
+            throw new IllegalOperationException();
+        }
         ToDo toDo = toDoRepository.save(ToDoMapper.convertToToDo(toDoRequest));
         return ToDoMapper.convertToToDoResponse(toDo);
     }
