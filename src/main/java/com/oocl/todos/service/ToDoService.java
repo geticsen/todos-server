@@ -30,6 +30,6 @@ public class ToDoService {
     }
 
     public ToDoResponse modifyToDo(ToDo toDo) {
-        return null;
+        return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
 }
