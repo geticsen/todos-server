@@ -2,6 +2,7 @@ package com.oocl.todos.controller;
 
 import com.oocl.todos.dto.ToDoRequest;
 import com.oocl.todos.dto.ToDoResponse;
+import com.oocl.todos.exception.NoSuchDataException;
 import com.oocl.todos.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ToDosController {
     }
     @PutMapping("/{toDoId}")
     @ResponseStatus(HttpStatus.OK)
-    public ToDoResponse modifyToDo(@PathVariable Integer toDoId,@RequestBody ToDoRequest toDoRequest){
+    public ToDoResponse modifyToDo(@PathVariable Integer toDoId,@RequestBody ToDoRequest toDoRequest) throws NoSuchDataException {
         return toDoService.modifyToDo(toDoId,toDoRequest);
     }
     @DeleteMapping("/{toDoId}")
