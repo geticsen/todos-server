@@ -1,13 +1,12 @@
 package com.oocl.todos.service;
 
+import com.oocl.todos.dto.ToDoRequest;
 import com.oocl.todos.dto.ToDoResponse;
 import com.oocl.todos.mapper.ToDoMapper;
 import com.oocl.todos.model.ToDo;
 import com.oocl.todos.repository.ToDoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +24,9 @@ public class ToDoService {
 
     }
 
-    public ToDoResponse addToDo(ToDo toDo) {
-        return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
+    public ToDoResponse addToDo(ToDoRequest toDoRequest) {
+        ToDo toDo = toDoRepository.save(ToDoMapper.convertToToDo(toDoRequest));
+        return ToDoMapper.convertToToDoResponse(toDo);
     }
 
     public ToDoResponse modifyToDo(Integer toDoId,ToDo toDo) {
