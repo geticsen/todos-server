@@ -13,9 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -61,5 +60,24 @@ public class ToDoIntegration {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.content").value("123456"))
                 .andExpect(jsonPath("$.status").value(false));
+    }
+
+    @Test
+    void should_return_modify_todo_when_modify_todo_given_modify_todo() throws Exception {
+//        given
+        ToDo toDo =new ToDo(1,"do home work",false);
+        ToDo savedTdo = toDoRepository.save(toDo);
+        String toDoString ="{\n" +
+                "    \"id\": "+ savedTdo.getId() +",\n" +
+                "    \"content\": \"123456\",\n" +
+                "    \"status\": true\n" +
+                "}";
+//        when then
+        mockMvc.perform(put("/todos/"+savedTdo.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(toDoString))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(savedTdo.getId()))
+                .andExpect(jsonPath("$.content").value("123456"))
+                .andExpect(jsonPath("$.status").value(true));
     }
 }
