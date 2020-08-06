@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,5 +44,22 @@ public class ToDoIntegration {
                 .andExpect(jsonPath("$",hasSize(2)))
                 .andExpect(jsonPath("$[0].id").isNumber())
                 .andExpect(jsonPath("$[1].id").isNumber());
+    }
+
+    @Test
+    void should_return_todos_when_add_todo_given_todo() throws Exception {
+//        given
+        String toDoString ="{\n" +
+                "    \"id\": 0,\n" +
+                "    \"content\": \"123456\",\n" +
+                "    \"status\": false\n" +
+                "}";
+//        when then
+        mockMvc.perform(post("/todos")
+        .contentType(MediaType.APPLICATION_JSON).content(toDoString))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.content").value("123456"))
+                .andExpect(jsonPath("$.status").value(false));
     }
 }
