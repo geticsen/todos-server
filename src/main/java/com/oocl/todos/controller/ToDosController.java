@@ -31,4 +31,9 @@ public class ToDosController {
     public ToDoResponse modifyToDo(@PathVariable Integer toDoId,@RequestBody ToDoRequest toDoRequest){
         return toDoService.modifyToDo(toDoId,toDoRequest);
     }
+    @DeleteMapping("/{toDoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteToDoById(@PathVariable Integer toDoId){
+        return toDoService.deleteToDoById(toDoId);
+    }
 }

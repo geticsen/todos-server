@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ToDoService {
-    private ToDoRepository toDoRepository;
+    private final ToDoRepository toDoRepository;
 
     public ToDoService(ToDoRepository toDoRepository) {
         this.toDoRepository = toDoRepository;
