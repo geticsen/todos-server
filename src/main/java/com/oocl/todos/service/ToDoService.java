@@ -28,4 +28,8 @@ public class ToDoService {
     public ToDoResponse addToDo(ToDo toDo) {
         return ToDoMapper.convertToToDoResponse(toDoRepository.save(toDo));
     }
+
+    public ToDoResponse modifyToDo(ToDo toDo) {
+        return null;
+    }
 }

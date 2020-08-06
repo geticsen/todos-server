@@ -46,4 +46,18 @@ public class ToDoServiceTest {
         assertEquals(toDo.getStatus(),toDoResponse.getStatus());
     }
 
+    @Test
+    void should_return_modify_todo_when_modify_todo_given_new_todo() {
+//      given
+        ToDo toDo = new ToDo(2,"go home",false);
+        ToDoRepository toDoRepository = mock(ToDoRepository.class);
+        given(toDoRepository.save(toDo)).willReturn(toDo);
+        ToDoService toDoService = new ToDoService(toDoRepository);
+//        when
+        ToDoResponse toDoResponse = toDoService.modifyToDo(toDo);
+//        then
+        assertEquals(toDo.getId(),toDoResponse.getId());
+        assertEquals(toDo.getContent(),toDoResponse.getContent());
+        assertEquals(toDo.getStatus(),toDoResponse.getStatus());
+    }
 }
