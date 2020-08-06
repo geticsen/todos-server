@@ -12,6 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class ToDoServiceTest {
@@ -59,6 +60,18 @@ public class ToDoServiceTest {
         assertEquals(toDo.getId(),toDoResponse.getId());
         assertEquals(toDo.getContent(),toDoResponse.getContent());
         assertEquals(toDo.getStatus(),toDoResponse.getStatus());
+    }
+    @Test
+    void should_return_message_when_delete_todo_given_todo_id() {
+//      given
+        String message = "success";
+        ToDo toDo = new ToDo(2,"go home",false);
+        ToDoRepository toDoRepository = mock(ToDoRepository.class);
+        ToDoService toDoService = new ToDoService(toDoRepository);
+//        when
+        String getmessage = toDoService.deleteToDoById(toDo.getId());
+//        then
+        assertEquals(message,getmessage);
     }
 
 }
