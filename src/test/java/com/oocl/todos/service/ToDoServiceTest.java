@@ -1,6 +1,7 @@
 package com.oocl.todos.service;
 
 import com.oocl.todos.dto.ToDoResponse;
+import com.oocl.todos.mapper.ToDoMapper;
 import com.oocl.todos.model.ToDo;
 import com.oocl.todos.repository.ToDoRepository;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,23 @@ public class ToDoServiceTest {
         given(toDoRepository.findAll()).willReturn(toDos);
         ToDoService toDoService = new ToDoService(toDoRepository);
 //        when
-        List<ToDoResponse> getToDos = toDoService.getAll();
+        List<ToDoResponse> getToDoResponses = toDoService.getAll();
 //        then
-        assertEquals(toDos.size(),getToDos.size());
+        assertEquals(toDos.size(),getToDoResponses.size());
     }
+    @Test
+    void should_return_todo_when_add_todo_given_todo() {
+//      given
+        ToDo toDo = new ToDo(2,"go home",false);
+        ToDoRepository toDoRepository = mock(ToDoRepository.class);
+
+        ToDoService toDoService = new ToDoService(toDoRepository);
+//        when
+        ToDoResponse toDoResponse = toDoService.addToDo(toDo);
+//        then
+        assertEquals(toDo.getId(),toDoResponse.getId());
+        assertEquals(toDo.getContent(),toDoResponse.getContent());
+        assertEquals(toDo.getStatus(),toDoResponse.getStatus());
+    }
+
 }

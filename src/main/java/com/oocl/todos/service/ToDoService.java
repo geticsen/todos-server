@@ -24,4 +24,8 @@ public class ToDoService {
         return toDos.stream().map(ToDoMapper::convertToToDoResponse).collect(Collectors.toList());
 
     }
+
+    public ToDoResponse addToDo(ToDo toDo) {
+        return null;
+    }
 }
